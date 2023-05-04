@@ -4,9 +4,6 @@ from torch.utils.data import DataLoader, SubsetRandomSampler
 from models.inception_resnet_v1 import InceptionResnetV1
 from torchvision import transforms
 from sklearn.model_selection import train_test_split
-from torch.optim import Adam
-from torch import nn
-from sklearn.metrics import accuracy_score
 from tqdm import tqdm
 from sklearn.neighbors import KNeighborsClassifier
 
