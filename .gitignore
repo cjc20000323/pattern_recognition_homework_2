@@ -2,3 +2,6 @@
 dataset
 __pycache__/
 models/__pycache__/
+checkpoint/*
+
+!checkpoint/README.md
