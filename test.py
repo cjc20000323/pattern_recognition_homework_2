@@ -35,6 +35,8 @@ def main():
     train_idx, test_idx = train_test_split(idx, train_size=0.8, stratify=dataset.targets, random_state=0)
     train_loader = DataLoader(dataset, batch_size=batch_size, sampler=SubsetRandomSampler(train_idx))
     test_loader = DataLoader(dataset, batch_size=batch_size, sampler=SubsetRandomSampler(test_idx))
+
+    model.eval()
     # 训练集的embeddings
     train_embeddings, train_labels = [], []
     for images, labels in tqdm(train_loader):
