@@ -1,3 +1,6 @@
+"""
+InceptionResnetV1的输入维度为(batch_size, 3, 299, 299)
+"""
 import torch
 from torch import nn
 from torch.nn import functional as F
