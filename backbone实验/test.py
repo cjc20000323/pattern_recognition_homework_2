@@ -6,18 +6,20 @@ from torchvision import transforms
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 from sklearn.neighbors import KNeighborsClassifier
+from models.iresnet import iresnet50
 
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 transform = transforms.Compose([
-    transforms.Resize((299, 299)),
+    transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
 ])
-data_dir = r"dataset/faces96-crop"
-model = InceptionResnetV1(classify=False).to(device)
+data_dir = r"dataset/CASIA-WebFace-subset"
+# model = InceptionResnetV1(classify=False).to(device)
+model = iresnet50(classify=False).to(device)
 batch_size = 16
-weight_path = 'checkpoint/InceptionResnetV1_softmax.pth'
+weight_path = 'checkpoint/iresnet50_webface_softmax_nocrop.pth'
 
 
 @torch.no_grad()

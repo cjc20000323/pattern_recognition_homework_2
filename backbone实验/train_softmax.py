@@ -8,20 +8,24 @@ from torch.optim import Adam
 from torch import nn
 from sklearn.metrics import accuracy_score
 from tqdm import tqdm
+from models.iresnet import iresnet50
+from models.mobile_facenet import MobileFacenet
 
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 transform = transforms.Compose([
-    transforms.Resize((299, 299)),
+    transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
 ])
-data_dir = r"dataset/faces96-crop"
-model = InceptionResnetV1(classify=True, num_classes=151).to(device)
+data_dir = r"dataset/CASIA-WebFace-subset"
+# model = InceptionResnetV1(classify=True, num_classes=1000).to(device)
+model = iresnet50(classify=True, num_classes=1000).to(device)
+# model = MobileFacenet(classify=True, num_classes=1000).to(device)
 batch_size = 16
-epochs = 20
+epochs = 100
 lr = 1e-4
-saved_path = 'checkpoint/InceptionResnetV1_softmax.pth'
+saved_path = 'checkpoint/iresnet50_webface_softmax_nocrop.pth'
 
 
 if __name__ == '__main__':
@@ -61,7 +65,7 @@ if __name__ == '__main__':
         test_loss = 0
         with torch.no_grad():
             pred_list, label_list = [], []
-            for images, labels in test_loader:
+            for images, labels in tqdm(test_loader):
                 images = images.to(device)
                 logits = model(images).cpu()
                 pred = torch.argmax(logits, dim=1)

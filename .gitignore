@@ -3,5 +3,6 @@ dataset
 __pycache__/
 models/__pycache__/
 checkpoint/*
+backbone_experiment/checkpoint/
 
 !checkpoint/README.md
