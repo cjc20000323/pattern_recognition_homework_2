@@ -6,5 +6,5 @@
 | :---------------: | :----: | :----: |
 | InceptionResnetV1 | 38.17  | 42.03  |
 |     IResnet50     | 27.63  | 35.73  |
-|   Mobilefacenet   |        |        |
+|   Mobilefacenet   | 20.14  | 17.74  |
 
